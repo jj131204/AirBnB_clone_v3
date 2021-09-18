@@ -16,6 +16,7 @@ def teardown_app(self):
     storage.close()
 
 if __name__ == "__main__":
+    """name"""
     host = environ.get('HBNB_API_HOST')
     port = environ.get('HBNB_API_PORT')
     if not host:
