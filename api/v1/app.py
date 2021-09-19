@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """flask"""
 
-from flask import Flask
+from flask import Flask, render_template
 from models import storage
 from api.v1.views import app_views
 
@@ -22,5 +22,5 @@ if __name__ == "__main__":
     if not host:
         host = '0.0.0.0'
     if not port:
-        port = 5000
-    app.run(host=host, port=int(port), threaded=True)
+        port = '5000'
+    app.run(host=host, port=port, threaded=True)
