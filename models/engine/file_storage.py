@@ -74,17 +74,18 @@ class FileStorage:
         """if cls is not classes.value():
             return None"""
 
-        all_ = self.all(cls)
+        if cls not in classes.values():
+            return None
 
-        for test in all_.values():
-
-            if test.id == id:
-                return test
+        all_cls = models.storage.all(cls)
+        for value in all_cls.values():
+            if (value.id == id):
+                return value
 
         return None
 
     def count(self, cls=None):
-        """  count the number of objects in storage:"""
+        """ count the number of objects in storage:"""
         count = 0
         if cls is not None:
 
