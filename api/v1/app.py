@@ -9,6 +9,10 @@ from os import environ
 app = Flask(__name__)
 app.register_blueprint(app_views)
 
+@app.errorhandler(404)
+def resource_not_found(e):
+    return jsonify(error=str(e)), 404
+
 
 @app.teardown_appcontext
 def teardown_app(self):
