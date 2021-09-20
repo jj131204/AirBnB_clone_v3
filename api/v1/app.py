@@ -10,9 +10,10 @@ from flask import jsonify
 app = Flask(__name__)
 app.register_blueprint(app_views)
 
+
 @app.errorhandler(404)
 def resource_not_found(error):
-    return jsonify({'error': 'Not found'}), 404)
+    return jsonify({'error': 'Not found'}), 404
 
 
 @app.teardown_appcontext
