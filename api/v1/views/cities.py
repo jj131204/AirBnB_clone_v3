@@ -7,7 +7,9 @@ from models import storage
 from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
 
-@app_views.route('/states/<state_id>/cities', methods=["GET"], strict_slashes=False)
+
+@app_views.route('/states/<state_id>/cities', methods=["GET"],
+                 strict_slashes=False)
 def cities_(state_id):
     """ get states """
 
@@ -21,6 +23,7 @@ def cities_(state_id):
         list_.append(test.to_dict())
 
     return jsonify(list_)
+
 
 @app_views.route('/cities/<city_id>/', methods=['GET'], strict_slashes=False)
 def get_cities_(city_id):
@@ -47,7 +50,9 @@ def Delete_city_(city_id):
     storage.save()
     return make_response(jsonify({}), 200)
 
-@app_views.route('/states/<state_id>/cities', methods=["POST"], strict_slashes=False)
+
+@app_views.route('/states/<state_id>/cities', methods=["POST"],
+                 strict_slashes=False)
 def Post_city_(state_id):
 
     state = storage.get(State, state_id)
@@ -68,6 +73,7 @@ def Post_city_(state_id):
     new_.state_id = state_id
     storage.save()
     return make_response(jsonify(new_.to_dict()), 201)
+
 
 @app_views.route('/cities/<city_id>', methods=["PUT"], strict_slashes=False)
 def Put_city_(city_id):

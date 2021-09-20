@@ -14,7 +14,6 @@ def states_():
     list_ = []
     storage_ = storage.all(State)
 
-
     for test in storage_.values():
         list_.append(test.to_dict())
 
