@@ -9,7 +9,7 @@ from flask import abort, jsonify, make_response, request
 
 
 @app_views.route('/amenities', methods=['GET'], strict_slashes=False)
-def amenities_():
+def get_amenities():
     """ Retrieves list of amenities """
     amenities = storage.all(Amenity).values()
     amenities_list = []
@@ -43,35 +43,27 @@ def delete_amenities(amenity_id):
 @app_views.route('/amenities', methods=['POST'], strict_slashes=False)
 def post_amenities():
     """ Create an amenities and return ir with status code 201 """
-
-    request_ = request.get_json()
-
-    if not request_():
+    if not request.get_json():
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
-
     if "name" not in request.get_json():
         return make_response(jsonify({'error': 'Missing name'}), 400)
-
-    new_ = Amenity(**data)
+    data = request.get_json()
+    instance = Amenity(**data)
     instance.save()
-    return make_response(jsonify(new_.to_dict()), 201)
+    return make_response(jsonify(instance.to_dict()), 201)
 
 
 @app_views.route('/amenities/<amenity_id>', methods=['PUT'],
                  strict_slashes=False)
 def put_amenities(amenity_id):
     """ updates an amenity object """
-
-    request_ = request.get_json()
-    amenity = storage.get(Amenity, amenity_id)
-
-    if not request_:
+    if not request.get_json():
         return make_response(jsonify({'error': 'Not a JSON'}), 400)
-
-    ignore = ['id', 'created_at', 'updated_at']
+    key_ignore = ['id', 'created_at', 'updated_at']
+    amenity = storage.get(Amenity, amenity_id)
     if not amenity:
         abort(404)
-
+    data = request.get_json()
     for key, value in data.items():
         if key not in key_ignore:
             setattr(amenity, key, value)
