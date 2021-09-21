@@ -22,6 +22,7 @@ def city_(state_id):
         list_.append(city.to_dict())
     return jsonify(list_)
 
+
 @app_views.route('/cities/<city_id>/', methods=['GET'], strict_slashes=False)
 def get_city_id(city_id):
     """ Retrieves a specific city by id """
