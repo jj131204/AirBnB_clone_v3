@@ -11,7 +11,7 @@ from flask import abort, jsonify, make_response, request
 @app_views.route('/amenities', methods=['GET'], strict_slashes=False)
 def amenities_():
     """ Retrieves list of amenities """
-    amenit = storage.all(Amenity).values()
+    amenities = storage.all(Amenity).values()
     amenities_list = []
     for amenity in amenities:
         amenities_list.append(amenity.to_dict())
