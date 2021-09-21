@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""RestFul API actions users
+"""users
 """
 
 from models.user import User
@@ -12,10 +12,10 @@ from flask import abort, jsonify, make_response, request
 def users_():
     """ Retrieves a list of users """
     users = storage.all(User).values()
-    users_list = []
+    list_ = []
     for user in users:
-        users_list.append(user.to_dict())
-    return jsonify(users_list)
+        list_.append(user.to_dict())
+    return jsonify(list_)
 
 
 @app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
@@ -23,6 +23,7 @@ def get_user_(user_id):
     """ Retrieves an user by id """
     user = storage.get(User, user_id)
     if not user:
+        """if not user"""
         abort(404)
     return jsonify(user.to_dict())
 
@@ -30,7 +31,7 @@ def get_user_(user_id):
 @app_views.route('/users/<user_id>', methods=['DELETE'],
                  strict_slashes=False)
 def delete_users_(user_id):
-    """ Deletes an user by id """
+    """ Deletes """
     user = storage.get(User, user_id)
     if not user:
         abort(404)
@@ -42,7 +43,7 @@ def delete_users_(user_id):
 @app_views.route('/users/<user_id>', methods=['DELETE'],
                  strict_slashes=False)
 def post_users_():
-    """ Create an user object """
+    """ MOTHODS DELETE """
 
     request_ = request.get_json()
 
@@ -61,6 +62,7 @@ def post_users_():
 @app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
 def put_users_(user_id):
     """ Updates an user object by id """
+
     user = storage.get(User, user_id)
     if not user:
         abort(404)
