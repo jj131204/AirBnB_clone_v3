@@ -52,7 +52,7 @@ def Post_states_():
     request_ = request.get_json()
 
     if not request_:
-        return make_response(jsonify({'error': 'Not a JSON'})
+        return make_response(jsonify({'error': 'Not a JSON'}))
     if 'name' not in request_:
 
         return make_response(jsonify({'error': 'Missing name'}), 400)
